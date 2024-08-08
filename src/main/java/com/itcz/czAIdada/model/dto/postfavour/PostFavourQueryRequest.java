@@ -1,8 +1,10 @@
 package com.itcz.czAIdada.model.dto.postfavour;
 
+
+import java.io.Serializable;
+
 import com.itcz.czAIdada.common.PageRequest;
 import com.itcz.czAIdada.model.dto.post.PostQueryRequest;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

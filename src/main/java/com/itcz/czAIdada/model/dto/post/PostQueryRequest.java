@@ -1,8 +1,9 @@
 package com.itcz.czAIdada.model.dto.post;
 
-import com.itcz.czAIdada.common.PageRequest;
 import java.io.Serializable;
 import java.util.List;
+
+import com.itcz.czAIdada.common.PageRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

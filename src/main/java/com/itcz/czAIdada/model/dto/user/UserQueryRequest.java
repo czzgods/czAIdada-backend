@@ -1,7 +1,9 @@
 package com.itcz.czAIdada.model.dto.user;
 
-import com.itcz.czAIdada.common.PageRequest;
+
 import java.io.Serializable;
+
+import com.itcz.czAIdada.common.PageRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

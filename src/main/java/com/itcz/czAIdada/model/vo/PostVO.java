@@ -1,10 +1,11 @@
 package com.itcz.czAIdada.model.vo;
 
 import cn.hutool.json.JSONUtil;
-import com.itcz.czAIdada.model.entity.Post;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import com.itcz.czAIdada.model.entity.Post;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
