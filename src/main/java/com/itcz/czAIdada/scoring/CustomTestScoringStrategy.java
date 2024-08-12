@@ -37,7 +37,6 @@ public class CustomTestScoringStrategy implements ScoringStrategy{
     public UserAnswer doScore(List<String> choices, App app) throws Exception {
         //1.根据id查询到题目和题目结果信息
         Long appId = app.getId();
-        // 1. 根据 id 查询到题目和题目结果信息
         Question question = questionService.getOne(
                 Wrappers.lambdaQuery(Question.class).eq(Question::getAppId, appId)
         );
