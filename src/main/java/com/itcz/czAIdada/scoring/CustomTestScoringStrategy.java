@@ -2,6 +2,7 @@ package com.itcz.czAIdada.scoring;
 
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.itcz.czAIdada.annotation.ScoringStrategyConfig;
 import com.itcz.czAIdada.model.dto.question.QuestionContentDTO;
 import com.itcz.czAIdada.model.entity.App;
 import com.itcz.czAIdada.model.entity.Question;
@@ -22,7 +23,7 @@ import java.util.Map;
  * 自定义测评类应用评分策略
  *
  */
-
+@ScoringStrategyConfig(appType = 1,scoringStrategy = 0)
 public class CustomTestScoringStrategy implements ScoringStrategy{
     @Resource
     private QuestionService questionService;
