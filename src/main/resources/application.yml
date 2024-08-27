@@ -78,3 +78,7 @@ knife4j:
         api-rule: package
         api-rule-resources:
           - com.itcz.czAIdada.controller
+
+#AI配置
+ai:
+  apiKey: 07e042bc6775cd61cf7e9594fd781004.H9REk01AnYodSHAL
