@@ -4,10 +4,8 @@ import com.itcz.czAIdada.common.ErrorCode;
 import com.itcz.czAIdada.exception.BusinessException;
 import com.zhipu.oapi.ClientV4;
 import com.zhipu.oapi.Constants;
-import com.zhipu.oapi.service.v4.model.ChatCompletionRequest;
-import com.zhipu.oapi.service.v4.model.ChatMessage;
-import com.zhipu.oapi.service.v4.model.ChatMessageRole;
-import com.zhipu.oapi.service.v4.model.ModelApiResponse;
+import com.zhipu.oapi.service.v4.model.*;
+import io.reactivex.Flowable;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -112,5 +110,47 @@ public class AiManager {
      */
     public String doSyncStableRequest(String systemMessage, String userMessage) {
         return doRequest(systemMessage, userMessage, Boolean.FALSE, STABLE_TEMPERATURE);
+    }
+
+    /**
+     * 通用流式请求
+     * @param messages
+     * @param temperature
+     * @return
+     */
+    public Flowable<ModelData> doStreamRequest(List<ChatMessage> messages, Float temperature){
+        //构造请求
+        ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest.builder()
+                .model(Constants.ModelChatGLM4)
+                .stream(Boolean.TRUE)
+                .temperature(temperature)
+                .invokeMethod(Constants.invokeMethod)
+                .messages(messages)
+                //.requestId(requestId)
+                .build();
+        try {
+            ModelApiResponse invokeModelApiResp = clientV4.invokeModelApi(chatCompletionRequest);
+            return invokeModelApiResp.getFlowable();
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR,e.getMessage());
+        }
+    }
+
+    /**
+     * 通用流式请求（简化消息传递）
+     *
+     * @param systemMessage
+     * @param userMessage
+     * @param temperature
+     * @return
+     */
+    public Flowable<ModelData> doStreamRequest(String systemMessage, String userMessage, Float temperature) {
+        List<ChatMessage> chatMessageList = new ArrayList<>();
+        ChatMessage systemChatMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), systemMessage);
+        chatMessageList.add(systemChatMessage);
+        ChatMessage userChatMessage = new ChatMessage(ChatMessageRole.USER.value(), userMessage);
+        chatMessageList.add(userChatMessage);
+        return doStreamRequest(chatMessageList, temperature);
     }
 }
