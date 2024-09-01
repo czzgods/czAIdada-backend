@@ -91,6 +91,7 @@ public class UserAnswerController {
             UserAnswer userAnswerWithResult = scoringStrategyExecutor.doScore(choices, app);
             //更新数据库
             userAnswerWithResult.setId(newUserAnswerId);
+            userAnswerWithResult.setAppId(null);
             userAnswerService.updateById(userAnswerWithResult);
         } catch (Exception e) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR,"评分错误");
