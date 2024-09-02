@@ -23,6 +23,7 @@ public class VipSchedulerConfig {
 
             @Override
             public Thread newThread(@NotNull Runnable r) {
+                //threadNumber.getAndIncrement() 每次调用完之后都会给原子类计数器 + 1
                 Thread thread = new Thread(r, "VIPThreadPool-" + threadNumber.getAndIncrement());
                 // 非守护线程
                 thread.setDaemon(false);
